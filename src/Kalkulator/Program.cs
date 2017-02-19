@@ -41,6 +41,8 @@ namespace Kalkulator
                     return (decimal)Math.Log(value);
                 case "sin":
                     return (decimal)Math.Sin(value);
+                case "cos":
+                    return (decimal)Math.Cos(value);
             }
 
             return null;

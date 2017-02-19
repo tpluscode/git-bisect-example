@@ -6,6 +6,7 @@ Manually:
 git bisect start
 git bisect bad
 git bisect good 6ad9aad
+git bisect good/bad
 ```
 
 Automatic:

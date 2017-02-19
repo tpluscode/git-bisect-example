@@ -43,8 +43,6 @@ namespace Kalkulator
 
         private static decimal? CalculateBinary(string op, decimal left, decimal right)
         {
-            decimal? result = null;
-
             switch (op)
             {
                 case "+":

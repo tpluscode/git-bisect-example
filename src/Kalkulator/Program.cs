@@ -56,7 +56,15 @@ namespace Kalkulator
 
         private static decimal? CalculateBinary(BinaryOperation<double, double> operation)
         {
-            return (decimal)Math.Log(operation.Right, operation.Left);
+            switch (operation.Operator)
+            {
+                case "log":
+                    return (decimal)Math.Log(operation.Right, operation.Left);
+                case "^":
+                    return (decimal)Math.Pow(operation.Left, operation.Right);
+            }
+
+            return null;
         }
 
         private static decimal? CalculateBinary(BinaryOperation<decimal, decimal> operation)
@@ -91,6 +99,11 @@ namespace Kalkulator
             if (args[0] == "log")
             {
                 return new BinaryOperation<double, double>(args[0], double.Parse(args[1]), double.Parse(args[2]));
+            }
+
+            if (args[1] == "^")
+            {
+                return new BinaryOperation<double, double>(args[1], double.Parse(args[0]), double.Parse(args[2]));
             }
 
             return new BinaryOperation<decimal, decimal>(args[1], decimal.Parse(args[0]), decimal.Parse(args[2]));

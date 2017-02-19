@@ -45,6 +45,8 @@ namespace Kalkulator
                     return (decimal)Math.Cos(value);
                 case "tg":
                     return (decimal)Math.Tan(value);
+                case "ctg":
+                    return 1 / (decimal)Math.Tan(value);
             }
 
             return null;

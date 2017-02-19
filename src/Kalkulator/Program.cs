@@ -31,12 +31,16 @@ namespace Kalkulator
 
         private static decimal? CalculateUnary(string op, string operand)
         {
+            var value = double.Parse(operand);
+
             switch (op)
             {
                 case "sqrt":
-                    return (decimal)Math.Sqrt(double.Parse(operand));
+                    return (decimal)Math.Sqrt(value);
                 case "ln":
-                    return (decimal)Math.Log(double.Parse(operand));
+                    return (decimal)Math.Log(value);
+                case "sin":
+                    return (decimal)Math.Sin(value);
             }
 
             return null;

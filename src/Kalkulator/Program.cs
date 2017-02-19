@@ -21,6 +21,9 @@ namespace Kalkulator
                 case "*":
                     Console.WriteLine(left * right);
                     break;
+                case "/":
+                    Console.WriteLine(left / right);
+                    break;
             }
         }
     }

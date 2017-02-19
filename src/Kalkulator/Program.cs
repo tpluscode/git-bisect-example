@@ -10,10 +10,19 @@ namespace Kalkulator
     {
         public static void Main(string[] args)
         {
-            object result = null;
+            decimal result;
             var op = args[1];
             var left = decimal.Parse(args[0]);
             var right = decimal.Parse(args[2]);
+
+            result = CalculateBinary(op, left, right);
+
+            Console.WriteLine($"Wynik: {result}");
+        }
+
+        private static decimal CalculateBinary(string op, decimal left, decimal right)
+        {
+            decimal result = 0;
 
             switch (op)
             {
@@ -21,7 +30,7 @@ namespace Kalkulator
                     result = left + right;
                     break;
                 case "-":
-                    result = left - right;
+                    result = left + right;
                     break;
                 case "*":
                     result = left * right;
@@ -31,7 +40,7 @@ namespace Kalkulator
                     break;
             }
 
-            Console.WriteLine($"Wynik: {result}");
+            return result;
         }
     }
 }

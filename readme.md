@@ -6,6 +6,11 @@ Manually:
 git bisect start
 git bisect bad
 git bisect good 6ad9aad
+
+// build
+// run Kalkulator.exe 3 - 3
+
+// should return 0, buggy builds return 6
 git bisect good/bad
 ```
 

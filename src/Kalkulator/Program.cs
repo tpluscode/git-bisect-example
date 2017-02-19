@@ -43,6 +43,8 @@ namespace Kalkulator
                     return (decimal)Math.Sin(value);
                 case "cos":
                     return (decimal)Math.Cos(value);
+                case "tg":
+                    return (decimal)Math.Tan(value);
             }
 
             return null;

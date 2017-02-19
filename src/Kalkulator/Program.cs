@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Kalkulator
 {
@@ -10,7 +6,7 @@ namespace Kalkulator
     {
         public static void Main(string[] args)
         {
-            decimal? result = null;
+            decimal? result;
 
             if (args.Length == 3)
             {
@@ -19,42 +15,49 @@ namespace Kalkulator
                 var right = decimal.Parse(args[2]);
                 result = CalculateBinary(op, left, right);
             }
-            else if(args.Length == 2)
+            else if (args.Length == 2)
             {
                 var op = args[0];
                 var operand = decimal.Parse(args[1]);
                 result = CalculateUnary(op, operand);
             }
+            else
+            {
+                Console.WriteLine("Złe argumenty");
+                return;
+            }
 
             Console.WriteLine($"Wynik: {result}");
         }
 
-        private static decimal? CalculateUnary(string op, object operand)
+        private static decimal? CalculateUnary(string op, decimal operand)
         {
-            throw new NotImplementedException();
+            switch (op)
+            {
+                case "sqrt":
+                    return (decimal)Math.Sqrt((double)operand);
+            }
+
+            return null;
         }
 
-        private static decimal CalculateBinary(string op, decimal left, decimal right)
+        private static decimal? CalculateBinary(string op, decimal left, decimal right)
         {
-            decimal result = 0;
+            decimal? result = null;
 
             switch (op)
             {
                 case "+":
-                    result = left + right;
-                    break;
+                    return left + right;
                 case "-":
-                    result = left + right;
-                    break;
+                    return left + right;
                 case "*":
-                    result = left * right;
-                    break;
+                    return left * right;
                 case "/":
-                    result = left / right;
-                    break;
+                    return left / right;
             }
 
-            return result;
+            return null;
         }
     }
 }

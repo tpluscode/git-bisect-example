@@ -18,8 +18,7 @@ namespace Kalkulator
             else if (args.Length == 2)
             {
                 var op = args[0];
-                var operand = decimal.Parse(args[1]);
-                result = CalculateUnary(op, operand);
+                result = CalculateUnary(op, args[1]);
             }
             else
             {
@@ -30,12 +29,14 @@ namespace Kalkulator
             Console.WriteLine($"Wynik: {result}");
         }
 
-        private static decimal? CalculateUnary(string op, decimal operand)
+        private static decimal? CalculateUnary(string op, string operand)
         {
             switch (op)
             {
                 case "sqrt":
-                    return (decimal)Math.Sqrt((double)operand);
+                    return (decimal)Math.Sqrt(double.Parse(operand));
+                case "ln":
+                    return (decimal)Math.Log(double.Parse(operand));
             }
 
             return null;

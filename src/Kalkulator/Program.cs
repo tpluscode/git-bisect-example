@@ -6,27 +6,27 @@ namespace Kalkulator
     {
         public static void Main(string[] args)
         {
-            decimal? result;
+            decimal? result = null;
 
             if (args.Length == 3)
             {
-                var op = args[1];
-                var left = decimal.Parse(args[0]);
-                var right = decimal.Parse(args[2]);
-                result = CalculateBinary(op, left, right);
+                var op = BinaryOperation.Parse(args);
+                result = CalculateBinary((dynamic)op);
             }
             else if (args.Length == 2)
             {
                 var op = args[0];
                 result = CalculateUnary(op, args[1]);
             }
-            else
+
+            if (result == null)
             {
                 Console.WriteLine("Złe argumenty");
-                return;
             }
-
-            Console.WriteLine($"Wynik: {result}");
+            else
+            {
+                Console.WriteLine($"Wynik: {result}");
+            }
         }
 
         private static decimal? CalculateUnary(string op, string operand)
@@ -42,21 +42,59 @@ namespace Kalkulator
             return null;
         }
 
-        private static decimal? CalculateBinary(string op, decimal left, decimal right)
+        private static decimal? CalculateBinary(BinaryOperation<double, double> operation)
         {
-            switch (op)
+            return (decimal)Math.Log(operation.Right, operation.Left);
+        }
+
+        private static decimal? CalculateBinary(BinaryOperation<decimal, decimal> operation)
+        {
+            switch (operation.Operator)
             {
                 case "+":
-                    return left + right;
+                    return operation.Left + operation.Right;
                 case "-":
-                    return left + right;
+                    return operation.Left + operation.Right;
                 case "*":
-                    return left * right;
+                    return operation.Left * operation.Right;
                 case "/":
-                    return left / right;
+                    return operation.Left / operation.Right;
             }
 
             return null;
         }
+    }
+
+    public class BinaryOperation
+    {
+        protected BinaryOperation(string @operator)
+        {
+            Operator = @operator;
+        }
+
+        public string Operator { get; }
+
+        public static BinaryOperation Parse(string[] args)
+        {
+            if (args[0] == "log")
+            {
+                return new BinaryOperation<double, double>(args[0], double.Parse(args[1]), double.Parse(args[2]));
+            }
+
+            return new BinaryOperation<decimal, decimal>(args[1], decimal.Parse(args[0]), decimal.Parse(args[2]));
+        }
+    }
+
+    public class BinaryOperation<TLeft, TRight> : BinaryOperation
+    {
+        public BinaryOperation(string @operator, TLeft left, TRight right) : base(@operator)
+        {
+            Left = left;
+            Right = right;
+        }
+
+        public TLeft Left { get; }
+
+        public TRight Right { get; }
     }
 }
